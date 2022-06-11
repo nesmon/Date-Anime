@@ -33,7 +33,7 @@ WIP :
     ```
 - Run the following command for install php dependencies :
     ```
-    docker-compose exec php composer install
+    docker-compose exec engine php composer install
     ```
 - Run the following command for setting up the database and set default user :
     ```
