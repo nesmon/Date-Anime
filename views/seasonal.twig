@@ -1,0 +1,15 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}
+  DateAnime - Anime Seasonal
+{% endblock %}
+
+{% block content %}
+  <div class=" d-flex justify-content-around flex-wrap">
+    {% for anime in animes %}
+      {% include 'component/anime_card.twig' with {'anime': anime, 'page': 'season'} %}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+

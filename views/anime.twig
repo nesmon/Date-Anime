@@ -1,0 +1,27 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}
+  DateAnime - Anime
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between">
+    <h3>Upcoming anime :</h3>
+    <button class="btn btn-primary"><a href="/anime/seasonal" class="link-light">See more</a></button>
+  </div>
+  <div class=" d-flex justify-content-around flex-wrap">
+    {% for upcomingAnime in upcomingAnimes %}
+      {% include 'component/anime_card.twig' with {'anime': upcomingAnime, 'page': 'season'} %}
+    {% endfor %}
+  </div>
+  
+  <h3>Anime available :</h3>
+  <div class=" d-flex justify-content-around flex-wrap">
+    {% for anime in animes %}
+      {% include 'component/anime_card.twig' with {'anime': anime} %}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+
+

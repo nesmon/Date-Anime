@@ -1,0 +1,16 @@
+<div class="card m-3" style="width: 18rem;">
+  <img 
+      {% if page == "season" %}
+        src="{{ anime.images.jpg.image_url}}" 
+      {% else %}
+        src="{{ anime.image_url}}" 
+      {% endif %}
+      class="card-img-top" 
+      alt="{{ anime.title }}" 
+      style="object-fit: cover; height: 300px;"
+  >
+  <div class="card-body">
+    <h5 class="card-title" id="{{ anime.title|replace({' ': '-'}) }}">{{ anime.title }}</h5>
+    <p class="card-text m-1" style="height: 250px;">{{ anime.synopsis|slice(0, 240) }}...</p>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+version: "3.3"
+
+services:
+    front:
+        image: nginx:1.11
+        volumes:
+            - .:/home/docker:ro
+            - ./docker/front/default.conf:/etc/nginx/conf.d/default.conf:ro
+        ports:
+            - "8081:80"
+        labels:
+            - "traefik.http.routers.front.rule=Host(`dateanime.localhost`)"
+        depends_on:
+            - engine
+        networks:
+            default:
+                aliases:
+                    - local.dateanime
+
+    engine:
+        build:
+            context: .
+            dockerfile: ./docker/engine/Dockerfile
+        volumes:
+            - dateanime:/home/dateanime
+            - .:/home/docker
+            - ./docker/engine/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro
+        user: "1000"
+        working_dir: /home/docker
+        depends_on:
+            - db
+        environment:
+            DATABASE_HOST: db
+            DATABASE_PORT: 5432
+            DATABASE_NAME: dateanime
+            DATABASE_USER: dateanime
+            DATABASE_PASSWORD: dateanime
+
+    db:
+        build:
+            context: .
+            dockerfile: ./docker/db/Dockerfile
+        ports:
+            - "8084:5432"
+        environment:
+            POSTGRES_PASSWORD: dateanime
+            POSTGRES_USER: dateanime
+            POSTGRES_DB: dateanime
+        volumes:
+            - db:/var/lib/postgresql/data
+    
+    traefik:
+        image: "traefik:v2.2"
+        container_name: "traefik-dateanime"
+        network_mode: "host"
+        command:
+            #- "--log.level=DEBUG"
+            - "--api.insecure=true"
+            - "--providers.docker=true"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+volumes:
+    db: {}
+    dateanime: {}

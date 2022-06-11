@@ -1,0 +1,27 @@
+{
+    "name": "nenes/dateanime",
+    "description": "A app using MAL for date with him",
+    "type": "project",
+    "require": {
+        "twig/twig": "^3.4",
+        "ext-pdo": "*",
+        "guzzlehttp/guzzle": "^7.4",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DateAnime\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nenes"
+        }
+    ],
+    "scripts": {
+        "init_db": [
+            "DateAnime\\Command\\InitDbCommand::initUserDB",
+            "DateAnime\\Command\\InitDbCommand::initAnimeDB"
+        ]
+    }
+}

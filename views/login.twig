@@ -1,0 +1,39 @@
+{% extends 'layout/base.twig' %}
+
+{% block title %}
+  DateAnime - Login
+{% endblock %}
+
+{% block content %}
+  {% if error %}
+  <div class="alert alert-danger" role="alert">
+    {{ error }}  
+  </div>
+  {% endif %}
+
+  <div class="row justify-content-center p-5 mb-4 rounded-3">
+    <div class="col-4 p-5">
+      <hr>
+      <div class="d-flex align-items-center justify-content-center">
+        <p class="text-center" style="width: 250px;">By logging in you will be able to view and edit your watchlist, and much more soon</p>
+      </div>
+    </div>
+    <div class="vr p-0"></div>
+    <div class="col-4 p-5">
+      <form class="row g-3" method="post" action="/login">
+        <div class="col-md-12">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="username">
+        </div>
+        <div class="col-md-12">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>    
+    </div>
+  </div>
+  
+{% endblock %}
